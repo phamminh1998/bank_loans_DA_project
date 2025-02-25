@@ -1,0 +1,35 @@
+Unable to complete action
+Warnings occurred while loading the workbook "C:\Users\PC\Documents\GitHub\bank_loans_DA_project\BankLoanDataAnalysisProject-Tableau Visualization.twb".
+The worksheet "Total Loan Applications" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Total Funded Amount" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Total Amount Received" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Term" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "State" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Purpose" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Month" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "MoM Total Funded Amount" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "MoM Total Amount Received" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "MoM Loan Applications" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "MoM Avg Int Rate" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "MoM Avg DTI" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "MTD Total Loan Applications" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "MTD Total Funded Amount" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "MTD Total Amout Received" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "MTD Avg Int Rate" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "MTD Avg DTI" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Loan Status" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Home Ownership" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Good Loan Issued" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Good Loan Funded Amount" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Good Loan Application %" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Good Loan Application" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Good Loan Amount Received" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Emp Length" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Details Tab" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Bad Loan Issued" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Bad Loan Funded Amount" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Bad Loan Application %" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Bad Loan Application" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Bad Loan Amount Received" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Avg Interest Rate" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
+The worksheet "Avg DTI" has not been opened because it is based on the data source "bank_loan_data (BankLoanDataAnalysisProject)", which could not be opened.
