@@ -13,7 +13,7 @@
 <div align="center">
 
 *Dashboard Demo Screenshots*
-![Dashboard Demo](sample-screenshots\SUMMARY.png)
+![Dashboard Demo](sample-screenshots\summary.png)
 
 </div>
 
