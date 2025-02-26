@@ -1,8 +1,37 @@
+CREATE DATABASE IF NOT EXISTS bank_loan;
+USE bank_loan
+# Data was imported using DBeaver import tool
+
+# Add new Date Column for converting
+ALTER TABLE bank_loan_data 
+ADD COLUMN issue_date_new DATE,
+ADD COLUMN last_credit_pull_date_new DATE,
+ADD COLUMN last_payment_date_new DATE,
+ADD COLUMN next_payment_date_new DATE;
+
+UPDATE bank_loan_data 
+SET 
+    issue_date_new = STR_TO_DATE(issue_date, '%d-%m-%Y'),
+    last_credit_pull_date_new = STR_TO_DATE(last_credit_pull_date, '%d-%m-%Y'),
+    last_payment_date_new = STR_TO_DATE(last_payment_date, '%d-%m-%Y'),
+    next_payment_date_new = STR_TO_DATE(next_payment_date, '%d-%m-%Y');
+
+ALTER TABLE bank_loan_data 
+DROP COLUMN issue_date,
+DROP COLUMN last_credit_pull_date,
+DROP COLUMN last_payment_date,
+DROP COLUMN next_payment_date;
+
+ALTER TABLE bank_loan_data 
+CHANGE COLUMN issue_date_new issue_date DATE,
+CHANGE COLUMN last_credit_pull_date_new last_credit_pull_date DATE,
+CHANGE COLUMN last_payment_date_new last_payment_date DATE,
+CHANGE COLUMN next_payment_date_new next_payment_date DATE;
+
+
 /*
 BANK LOAN DATA ANALYSIS PROJECT
 */
-
-
 
 /*
 Part 1: BANK LOAN REPORT | SUMMARY
