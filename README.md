@@ -1,26 +1,51 @@
 <div align="center">
 
-  <h2 align="center">Bank Loan Data Analysis</h2>
+  <h2 align="center">Bank Loan Data Analysis PROJECT</h2>
 
-  This project utilizes SQL and Tableau to analyze a dataset of U.S. bank loan data for the year 2021, <br /> generating a Tableau visualization report that consists of three dashboards: Summary, Overview, and Details.
+  This project apply SQL to analyze a dataset of U.S. bank loan data for the year 2021 to identify general trend and insight, <br /> and create in Tableau three interactive dashboards: Summary, Overview, and Details.
 
   <p align="center">
-  <a href="https://public.tableau.com/app/profile/sylvia.li4170/viz/BankLoanDataAnalysis/SUMMARY"><strong>➥ Live Demo</strong></a>
+  <a href="https://public.tableau.com/views/BankLoanReport_17405014016650/SUMMARY?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"><strong>➥ Live Demo</strong></a>
   </p>
 
   <br />
   
   *Dashboard Demo Screenshots*
-  ![Tableau Desktop Demo](./sample-screenshots/dashboard_outline.jpg)  
+![Tableau Desktop](sample-screenshots/SUMMARY.png)
 
-  *When you enter my Tableau visualization project, if your screen cannot fully display all the content of the dashboard, <br /> please use your browser's zoom function to view the entire dashboard.*
+  *If your screen cannot fully display all the content of the dashboard, please use Tableau Public "See this in full screen" function to view the entire dashboard.*
   
 
 </div>
 
-## User Guide
+## I. Analysis with SQL
+Dataset was imported into MySQL database using DBeaver import tools. Then a series of descriptive question was done using SQL (MySQL flavor). Details on SQL analysis can be found in the [SQL script](<SQL adhoc analyze.sql>)
 
-In the ```summary dashboard```, you can click on filters for Purpose, Grade, and Verification Status to explore bank loan data for the year 2021. This includes Total Loan Applications, Total Funded Amount, Total Amount Received, Average Interest Rate, Average Debt-to-Income Ratio (DTI), along with their monthly averages and monthly growth rates. Additionally, information on Good Loan Issued, Bad Loan Issued, and Loan Status is available.
+### 📖 Key Terms in the Report  
+
+- **MTD (Month-to-Date):** The total accumulated value from the start of the current month up to today.  
+- **MoM (Month-over-Month):** Measures the change (percentage or absolute) from the previous month.  
+- **DTI (Debt-to-Income Ratio):** Assesses a borrower's debt relative to income, indicating their ability to manage additional debt.  
+- **Good Loan:** Includes loans classified as **"Fully Paid"** or **"Current"** in loan status.  
+- **Bad Loan:** Refers to loans labeled **"Charged Off"**, indicating default.  
+- **Grade:** A credit risk rating for loans, where higher grades denote lower risk. **Sub-grade** provides finer risk differentiation within each grade.  
+- **Verification Status:** Indicates whether a borrower's financial details have been verified for accuracy.  
+- **Loan Status:** Represents the current state of a loan (e.g., **Fully Paid, Current, Default**), tracking its repayment progress.  
+
+*SQL Demo Screenshots*
+![SQL Demo](sample-screenshots/SQL.png)
+
+## II. Dashboard in Tableau
+
+The **Summary Dashboard** allows you to filter bank loan data for 2021 by **Purpose, Grade, and Verification Status**.  
+Key insights include: 
+- Total Loan Applications, Funded Amount, and Amount Received
+- Average Interest Rate and Debt-to-Income Ratio (DTI)
+- Monthly averages and growth rates
+- Breakdown of Good vs. Bad Loans and Loan Status  
+
+Use the interactive filters to explore trends and patterns in the dataset.  
+
 
 <div align="center">
 
@@ -29,7 +54,8 @@ In the ```summary dashboard```, you can click on filters for Purpose, Grade, and
 
 </div>
 
-In the ```overview dashboard```, you can also click on filters for Purpose, Grade, and Verification Status to explore bank loan data for the year 2021. Additionally, you can explore a summary of monthly data, bank loan details for each state in the U.S., loan terms, borrower's years of employment, loan purposes, and the homeowner status of the borrower. When clicking on these diagrams, the data will interactively change across all diagrams and tables.
+In the **`Overview Dashboard`**, you can filter by **Purpose, Grade,** and **Verification Status** to analyze bank loan data for 2021. This dashboard provides insights into **monthly summaries, loan distribution across U.S. states, loan terms, borrower employment history, loan purposes, and homeownership status**. Clicking on any diagram dynamically updates all charts and tables for interactive exploration.  
+
 
 <div align="center">
 
@@ -38,7 +64,7 @@ In the ```overview dashboard```, you can also click on filters for Purpose, Grad
 
 </div>
 
-In the ```details dashboard```, you can also click on filters for Purpose, Grade, and Verification Status to explore bank loan data for the year 2021. In addition, you can click on the main table's headers to sort and filter, and you can scroll through the main table to view all the loan data records for the banks in 2021.
+In the **`Details Dashboard`**, you can also filter by **Purpose, Grade,** and **Verification Status**. Additionally, you can **sort and filter columns** in the main table and scroll through to view all **loan records from 2021**.  
 
 <div align="center">
 
@@ -47,22 +73,8 @@ In the ```details dashboard```, you can also click on filters for Purpose, Grade
 
 </div>
 
+🎉 Excited to explore the dashboard yourself? Check it out on my **[Tableau Public](https://public.tableau.com/views/BankLoanReport_17405014016650/SUMMARY?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)** and have fun analyzing the data! 🚀  
 
-## Explanation of Terms Used in the Report
 
-**MTD (Month-to-Date):** Refers to the cumulative total for the current month up to the current date.
 
-**MoM (Month-over-Month):** Represents the percentage or absolute change compared to the previous month.
-
-**DTI (Debt-to-Income Ratio):** DTI measures the borrower's debt burden relative to income. It gauges the borrower's capacity to take on additional debt.
-
-**Good Loan:** This category includes loans with a loan status of 'Fully Paid' and 'Current.'
-
-**Bad Loan:** This category specifically includes loans with a loan status of 'Charged Off.'
-
-**Grade:** Grade represents a risk classification assigned to the loan based on creditworthiness. Higher grades signify lower risk. Sub Grade refines the risk assessment within a grade, providing additional risk differentiation.
-
-**Verification Status:** Verification Status indicates whether the borrower's financial information has been verified. It assesses data accuracy.
-
-**Loan Status:** Loan Status indicates the current state of the loan (e.g., fully paid, current, default). It tracks loan performance.
 

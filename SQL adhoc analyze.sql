@@ -9,7 +9,7 @@ Part 1: BANK LOAN REPORT | SUMMARY
 */
 
 /*
-1.Primary KPI¡¦s:
+1.Primary KPIs:
 */
 
 -- 1.Total Loan Applications
