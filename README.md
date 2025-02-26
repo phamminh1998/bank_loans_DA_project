@@ -9,10 +9,10 @@
   </p>
 
   <br />
-  
+<div align="center">  
   *Dashboard Demo Screenshots*
 ![Dashboard Demo](sample-screenshots/SUMMARY.png)
-
+</div>
   *If your screen cannot fully display all the content of the dashboard, please use Tableau Public "See this in full screen" function to view the entire dashboard.*
   
 
@@ -31,9 +31,10 @@ Dataset was imported into MySQL database using DBeaver import tools. Then a seri
 - **Grade:** A credit risk rating for loans, where higher grades denote lower risk. **Sub-grade** provides finer risk differentiation within each grade.  
 - **Verification Status:** Indicates whether a borrower's financial details have been verified for accuracy.  
 - **Loan Status:** Represents the current state of a loan (e.g., **Fully Paid, Current, Default**), tracking its repayment progress.  
-
+<div align="center">
 *SQL Demo Screenshots*
 ![SQL Demo](sample-screenshots/SQL.png)
+</div>
 
 ## II. Dashboard in Tableau
 
