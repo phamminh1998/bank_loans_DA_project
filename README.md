@@ -11,7 +11,7 @@
   <br />
   
   *Dashboard Demo Screenshots*
-![Tableau Desktop](sample-screenshots/SUMMARY.png)
+![Dashboard Demo](sample-screenshots/SUMMARY.png)
 
   *If your screen cannot fully display all the content of the dashboard, please use Tableau Public "See this in full screen" function to view the entire dashboard.*
   
