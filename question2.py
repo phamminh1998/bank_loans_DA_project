@@ -12,8 +12,13 @@ cho internal_id "a"  có giá trị thặng dư = -5. Thứ tự logic như sau:
 
 Đây không phải là logic hợp lí nhất theo đề bài, nhưng là logic duy nhất
 để tính ra kết quả -5 cho internal_id "a".
-1 số logic khác đã thử: top 3 external_id có số lần giao dịch nhiều nhất, 
-top 3 external_id có tổng giá trị giao dịch lớn nhất. 
+1 số logic khác đã thử nhưng không cho ra kết quả -5 cho internal_id "a": 
+- Với mỗi internal_id, chọn top 3 external_id có số lần giao dịch nhiều nhất
+sau đó tính trung bình thặng dư giao dịch với 3 external_id này.
+(Ở internal_id "a" là 3 id b,c,d)
+- Với mỗi internal_id, chọn top 3 external_id có tổng giá trị giao dịch lớn nhất.
+Sau đó tính trung bình thặng dư giao dịch với 3 external_id này.
+(Ở internal_id "a" là 3 id c,d,e)
 Tuy nhiên đều không cho ra kết quả -5 cho internal_id "a".
 '''
 

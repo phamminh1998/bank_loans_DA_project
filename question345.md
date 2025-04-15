@@ -1,6 +1,7 @@
 # Câu 3 – Thiết kế giải pháp phát hiện khách hàng "thiếu tiền"
 
-Giải pháp được thiết kế theo Cross Industry Standard Process for Data Mining (CRISP-DM)
+Giải pháp được thiết kế theo Cross Industry Standard Process for Data Mining (CRISP-DM).
+Áp dụng mô hình thiết kế này, người viết đưa ra giải pháp theo mindset: quá trình xây dựng 1 giải pháp/mô hình data-driven là 1 vòng lặp cải tiến liên tục, với các bước lựa chọn feature, lựa chọn model, đánh giá sẽ luôn có điểm để nâng cao hiệu suất của giải pháp(point of improvement). Do đó giải pháp dưới đây sẽ không fix cứng ở 1 feature set hoặc 1 model. 
 
 ## 1. Business Understanding
 
@@ -51,6 +52,7 @@ Ví dụ: người có số dư tài khoản thấp, lại có tỉ lệ rút ti
 - Thời gian dừng ở module vay / tín dụng
 - Tìm kiếm các từ khóa như "vay", "tín dụng", "hỗ trợ tiền mặt"
 
+Việc lựa chọn các biến cũng như quá trình chuẩn bị dữ liệu ở bước sau sẽ phụ thuộc vào mức độ available của dữ liệu và model sẽ sử dụng, và luôn có thể quay lại bước này để thực hiện lại feature selection nhằm nâng cao hiệu suất mô hình.
 ---
 
 ## 3. Data Preparation
@@ -62,13 +64,13 @@ Một số pre-processing dữ liệu cần thiết:
 - **Chuẩn hóa biến số liên tục** (StandardScaler, MinMaxScaler)
 - **Encoding biến phân loại**: One-Hot Encoding hoặc Target Encoding cho các cột như nghề nghiệp, khu vực
 - **Tạo biến tương tác**: ví dụ `tỷ lệ chi tiêu / thu nhập`, `rút tiền / số dư`
-- **Giảm chiều (optional)**: PCA nếu số feature nhiều và mô hình cần đơn giản
+- **Giảm chiều**: PCA nếu số feature nhiều và mô hình cần đơn giản
 
 ---
 
 ## 4. Modeling
 
-Dưới đây là 1 số gợi ý các model phù hợp cho bài toán classification nhằm dự đoán khả năng **khách hàng cần vay tiền**.
+Dưới đây là 1 số gợi ý các model phù hợp cho bài toán classification nhằm dự đoán khả năng **khách hàng cần vay tiền**, được xếp theo thứ tự từ đơn giản đến phức tạp.
 
 ---
 
@@ -76,12 +78,18 @@ Dưới đây là 1 số gợi ý các model phù hợp cho bài toán classific
 Tiêu biểu là **Logistic Regression**. 
   - Ưu điểm: đơn giản, nhanh, dễ triển khai, dễ hiểu, dễ giải thích rõ từng hệ số ảnh hưởng đến xác suất thiếu tiền.
   - Nhược điểm: phải giả định là xác suất có thể bán được sản phẩm vay cho khách hàng là tuyến tính với các biến đầu vào, do đó kém hiệu quả với dữ liệu phi tuyến. Ngoài ra, phải xử lí pre-processing để impute missing data
+  
+Với các ưu điểm của mình, model logistic regression có thể được training ở bước đầu nhằm tạo baseline model để so sánh hiệu quả cho các model phức tạp hơn
+
 ---
 
 ### **Ensemble Models**  
 Là nhóm các model phát triển dựa trên việc kết hợp nhiều decision tree model, với ưu điểm chung là hiểu quả với dữ liệu phi tuyết tính và không cần xử lí missing data
+
+
 #### **Bagging**
 Là nhóm các model được thực hiện bằng cách chạy song song decision tree trên nhiều sample con của dataset, các decision tree này sẽ cùng vote để có được giá trị dự đoán cuối cùng cho đầu ra. Tiêu biểu của nhóm model này là **Random Forest**
+
   - Ưu điểm: kháng overfitting tốt, hoạt động hiệu quả trên nhiều loại dữ liệu, robust với outliers.
   - Nhược điểm: model yêu cầu khả năng tính toán của máy tính cao do chạy song song nhiều model, ít trực quan hóa mối quan hệ biến – mục tiêu hơn so với các model tuyến tính do mỗi tree có 1 tệp sample khác nhau và đánh giá tầm quan trọng của feature khác nhau -> khó diễn đạt
 
@@ -89,13 +97,10 @@ Là nhóm các model được thực hiện bằng cách chạy song song decisi
 
 #### **Boosting (Sequential Weak Learners)**
 Như tên gọi, đây là nhóm ensemble model được xây dựng bằng cách chạy nhiều lần, lần lượt decision tree trên training set, với mỗi decision tree sau sẽ tập trung vào các weak point (các entry bị dự đoán sai và tăng weight để các decision tree sau coi trọng các entry này hơn). Một số model tiêu biểu có thể ứng dụng là:
+
 - **XGBoost**
   - Ưu điểm: hiệu năng cao, kiểm soát overfitting tốt, hỗ trợ regularization, xử lý missing value tự nhiên.
   - Nhược điểm: dễ overfit với dữ liệu nhỏ, cần tuning nhiều.
-
-- **LightGBM**
-  - Ưu điểm: tốc độ huấn luyện nhanh hơn XGBoost, hỗ trợ categorical feature native.
-  - Nhược điểm: đôi khi không ổn định với dữ liệu nhỏ hoặc mất cân bằng.
 
 - **CatBoost**
   - Ưu điểm: không cần encode biến phân loại, hoạt động tốt với tập nhỏ và không cần tuning nhiều.
@@ -106,7 +111,7 @@ Như tên gọi, đây là nhóm ensemble model được xây dựng bằng các
 ### **Neural Networks (Deep Learning)**
 Neural Network là mô hình học sâu mô phỏng cấu trúc não bộ, gồm nhiều lớp liên kết (layers) giúp học các mối quan hệ phức tạp, đặc biệt tốt trong việc mô hình hóa các mối quan hệ phi tuyến.
 Ưu điểm chung của nhóm model này là: Khả năng tiếp nhận các biến dữ liệu phi tuyến, tự động học và tìm được đặc trưng ẩn (hidden features), Linh hoạt trong việc mở rộng và kết hợp với các kỹ thuật embedding, attention, ...
-Tuy nhiên, NN có những nhược điểm sau: Yêu cầu dữ liệu lớn để học tốt, cần tài nguyên máy tính để có thể training. Cần data scientist phải có hiểu biết về tuning hyperparameter và xử lý overfitting. Khó giải thích so với các mô hình truyền thống do có các lớp đặc trưng ẩn mà mô hình tự khám phá (hidden layer)
+Tuy nhiên, NN có nhược điểm sau: Yêu cầu dữ liệu lớn để học tốt, cần tài nguyên máy tính để có thể training. Cần data scientist phải có hiểu biết về tuning hyperparameter và xử lý overfitting. Khó giải thích so với các mô hình truyền thống do có các lớp đặc trưng ẩn mà mô hình tự khám phá (hidden layer)
 
 Một số model ANN tiêu biểu là
 - **Feedforward Neural Network (MLP)**  
@@ -119,10 +124,6 @@ Một số model ANN tiêu biểu là
   → Dùng khi có nhiều biến phân loại – embedding giúp mô hình hiểu các mối quan hệ tiềm ẩn giữa các giá trị phân loại, ví dụ: ngành nghề, khu vực, sản phẩm.
 
 **Dù lựa chọn model nào, thì quá trình tạo dựng giải pháp là 1 vòng lặp của việc thử nghiệm, đánh giá, so sánh giữa các model cũng như các yếu tố như thời gian, chi phí train model, khả năng giải thích cho end-user cũng như deploy vào hệ thống**
-
-Dưới đây là phần viết lại **Bước 5. Evaluation** và bổ sung **Bước 6. Deploy**, trình bày rõ ràng theo format markdown:
-
----
 
 ## 5. **Evaluation (Đánh giá mô hình)**
 
@@ -146,50 +147,51 @@ Vì đây là bài toán phân loại nhị phân với mục tiêu **xác suấ
 - **Log Loss (Binary Cross Entropy)**  
   Đo độ lệch giữa xác suất dự đoán và nhãn thực tế. Phù hợp cho bài toán xác suất vì phản ánh **chất lượng xác suất** hơn là nhãn cứng.
 
+Ngoài ra còn có các chỉ tiêu về thời gian training, chi phí computing, độ phức tạp trong deploy,...
+Các chỉ số trên sẽ được so sánh giữa các model - feature set nhằm đánh giá hiệu suất của các model để tiến đến model tối ưu nhất
 ---
 
 ## 6. **Deploy (Triển khai mô hình)**
 
 Các bước triển khai điển hình:
 
-**Model Packaging**  
-   - Lưu mô hình dưới dạng `.pkl`, `.joblib`, hoặc `ONNX` (nếu dùng deep learning).
-   - Kèm theo pipeline xử lý đầu vào (scaler, encoder,…).
-
-**Triển khai API hoặc batch job**
-   - Dạng **API**: triển khai trên Flask, FastAPI hoặc MLFlow Serving nếu tích hợp vào hệ thống online.
-   - Dạng **batch**: chạy định kỳ (ví dụ: hằng ngày) để đánh giá rủi ro toàn bộ tập khách hàng.
-
-**Kết nối với hệ thống kinh doanh**
-   - Push kết quả dự đoán (probability) về CRM, dashboard nội bộ hoặc gửi danh sách cho đội kinh doanh.
-
-**Giám sát hiệu suất mô hình (Monitoring)**
-   - Theo dõi các chỉ số: drift, độ chính xác thực tế (real-world accuracy), tốc độ dự đoán, log lỗi.
-   - Cảnh báo khi mô hình xuống cấp.
-
-**Cập nhật & retrain**
-   - Thiết kế pipeline để **tự động cập nhật mô hình** sau mỗi chu kỳ (ví dụ: 3 tháng), hoặc khi có dữ liệu mới.
+- Model packaging
+- Triển khai bằng API hoặc batch job
+- Kết nối với hệ thống kinh doanh: Push kết quả dự đoán (probability) về CRM, dashboard nội bộ hoặc gửi danh sách cho đội kinh doanh.
+- Giám sát hiệu suất mô hình (Monitoring), đánh giá vào cảnh báo khi performance giảm sút.
+- Cập nhật & retrain (thủ công hoặc tự động với pipeline)
 
 # 4. Doanh số chi tiêu thẻ tháng này giảm mạnh 20% — Giải pháp từ góc độ Data Scientist
 
 ## Phân tích tình huống:
 Doanh số chi tiêu thẻ tụt mạnh có thể bắt nguồn từ thay đổi hành vi khách hàng, vấn đề nội bộ, hoặc yếu tố thị trường. Cần phân tích nguyên nhân để từ đó đưa ra các hành động cụ thể.
 
-## Một số khả năng cần kiểm tra:
-- **Thay đổi hành vi khách hàng**: số lượng giao dịch giảm, giá trị giao dịch thấp hơn, ít sử dụng thẻ tín dụng -> có thể do đặc điểm dòng thẻ không còn phù hợp với thị trường hoặc hành vi tiêu dùng
-- **Thị trường hoặc cạnh tranh**: đối thủ có khuyến mãi mạnh, chuyển đổi sang ví điện tử khác.
-- **Chính sách ngân hàng**: hạn mức tín dụng thay đổi, hệ thống lỗi.
+## Đặt ra hypothesis:
+- Khách hàng có xu hướng giảm chi tiêu cá nhân do yếu tố kinh tế vĩ mô hoặc thu nhập giảm.
+- Tăng trưởng sử dụng các ví điện tử và nền tảng thanh toán khác thay thế thẻ ngân hàng.
+- Khách hàng gặp trải nghiệm không tốt với app hoặc dịch vụ của ngân hàng nên giảm sử dụng thẻ.
+- Có thay đổi chính sách hạn mức hoặc phí liên quan đến thẻ khiến khách hàng ít sử dụng hơn.
+- Các chiến dịch khuyến mãi hoặc ưu đãi từ ngân hàng dừng lại làm giảm động lực chi tiêu.
+
+## Kiểm chứng hypothesis dựa trên data
+- Khách hàng có xu hướng giảm chi tiêu: Kiểm tra lịch sử giao dịch thẻ của khách hàng, so sánh timeline với thay đổi trong chỉ số giá CPI hoặc các chỉ số đánh giá nền kinh tế, dòng tiền vào của tài khoản khách hàng.
+- Tăng trưởng sử dụng ví điện tử/nền tảng thanh toán/ngân hàng khác: Kiểm tra thay đổi về số lượng và giá trị giao dịch của các giao dịch chuyển khoản/nạp tiền vào ví điện tử, có thể đi kèm với competitor analysis (các chương trình khuyến mãi của đối thủ gần đây làm breakpoint)
+- Trải nghiệm không tốt với app: log hành vi app, runtime thời gian thanh toán online bằng thẻ tín dụng, số lần lỗi app, số khiếu nại của khách hàng.
+- Thay đổi chính sách phí thẻ/hạn mức/khuyến mãi: Kiểm tra lịch sử giao dịch thẻ với với thời điểm thay đổi các chính sách là breakpoint.
+
 
 ## Một số nhu cầu kinh doanh có thể giải quyết bằng data science:
 1. **Phân khúc khách hàng có doanh số chi tiêu giảm rõ rệt**
    - **Bài toán DS**: Clustering khách hàng theo hành vi chi tiêu qua các tháng.
    - **Feature**: tổng chi tiêu, số lần giao dịch, loại giao dịch, ngành hàng sử dụng.
    - **Giải pháp**: Dùng KMeans hoặc DBSCAN để phân cụm, xác định nhóm sụt giảm.
+   - **Mục tiêu cuối**: Xác định nhóm khách hàng có đặc điểm đang và sẽ giảm chi tiêu, thực hiện các campaign marketing về lợi ích của việc dùng thẻ.
 
 2. **Dự báo doanh số chi tiêu và cảnh báo sớm sụt giảm**
    - **Bài toán DS**: Time-series forecasting.
-   - **Feature**: lịch sử chi tiêu thẻ tín dụng, biến động chi tiêu giữa các tháng.
+   - **Feature**: lịch sử chi tiêu thẻ tín dụng, biến động chi tiêu giữa các tháng và các lần thay đổi chính sách
    - **Giải pháp**: ARIMA, LSTM cho time-series
+   - **Mục tiêu cuối**: Lường trước sụt giảm có thể xảy ra khi thay đổi chính sách, từ đó cân nhắc chiến lược.
 
 3. **Phân tích nguyên nhân sụt giảm**
    - **Bài toán DS**: Causal inference hoặc feature importance analysis.
@@ -203,25 +205,29 @@ Doanh số chi tiêu thẻ tụt mạnh có thể bắt nguồn từ thay đổi
 ## Phân tích tình huống:
 Mục tiêu tăng 20% tổng huy động vốn trong năm cần hỗ trợ bằng các chiến lược cụ thể về khách hàng, sản phẩm, và kênh phân phối.
 
-## Một số nhu cầu kinh doanh có thể đặt ra:
+## Một số nghiệp vụ kinh doanh có thể được giải quyết bằng DS:
 1. **Tìm tập khách hàng tiềm năng có khả năng gửi thêm tiền**
+   Tương tụ như bài toán tìm khách hàng cho vay, nhưng với nhóm khách hàng có thể bán thêm sản phẩm huy động vốn
    - **Bài toán DS**: classification – likelihood of deposit.
-   - **Feature**: số dư hiện tại, lịch sử giao dịch gửi tiền, thu nhập, độ tuổi.
-   - **Giải pháp**: Logistic Regression, Random Forest hoặc XGBoost.
+   - **Feature**: số dư hiện tại, lịch sử giao dịch gửi tiền, thu nhập, độ tuổi, các sản phẩm đang sở hữu
+   - **Giải pháp**: Logistic Regression, Random Forest, XGBoost, hoặc ANN
 
 2. **Phân nhóm khách hàng để đưa ra chiến lược gói sản phẩm huy động vốn**
+   Nhằm định hình đặc điểm của nhóm khách hàng, từ đó đưa ra chiến lược bán hàng, marketing, gói sản phẩm phù hợp với từng segment.
    - **Bài toán DS**: Customer segmentation.
    - **Feature**: mục tiêu tài chính, thu nhập, sản phẩm nắm giữ.
    - **Giải pháp**: KMeans hoặc Hierarchical Clustering để phân nhóm và đưa ra chính sách phù hợp.
 
 3. **Tối ưu hóa kênh phân phối sản phẩm huy động**
+   Cải tiến các model đang có nhằm nâng cao trải nghiệm của khách hàng với các sản phẩm huy động vốn online.
    - **Bài toán DS**: Recommendation system hoặc uplift modeling.
    - **Feature**: hành vi trên app, lịch sử sản phẩm nắm giữ, thu nhập
    - **Giải pháp**: Collaborative filtering hoặc uplift tree modeling.
 
 4. **Dự báo huy động theo khu vực hoặc nhóm khách hàng**
+   Mục tiêu là dự đoán được nhóm khách hàng, khu vực khách hàng sẽ có tăng trưởng về vốn cá nhân trong thời gian tới, từ đó thúc đẩy phòng kinh doanh tiếp cận các khách hàng này.
    - **Bài toán DS**: Forecasting.
-   - **Feature**: dữ liệu lịch sử huy động theo phân khúc/khu vực/tháng.
+   - **Feature**: dữ liệu lịch sử huy động theo phân khúc/khu vực/thời gian, lịch sử thu nhập
    - **Giải pháp**: ARIMA, Prophet hoặc LSTM.
 
 ```
